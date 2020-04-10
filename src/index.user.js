@@ -1,6 +1,6 @@
     // ==UserScript==
 // @name        IPP
-// @version     1.0
+// @version     1.1
 // @match       https://pixelspace.glitch.me/*
 // @author      Felipe GM
 // @description see an image as it would be inside the game.
