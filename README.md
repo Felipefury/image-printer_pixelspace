@@ -5,12 +5,12 @@
 
 **1 - Tampermoneky**
 
-> Chrome: https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo
-> Firefox: https://addons.mozilla.org/firefox/addon/greasemonkey/
-> Opera: https://addons.opera.com/extensions/details/tampermonkey-beta/
-> Safari: https://safari.tampermonkey.net/tampermonkey.safariextz
-> Microsoft Edge: https://www.microsoft.com/store/p/tampermonkey/9nblggh5162s
-> Brave: https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo
+> Chrome: https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo <br>
+> Firefox: https://addons.mozilla.org/firefox/addon/greasemonkey/ <br>
+> Opera: https://addons.opera.com/extensions/details/tampermonkey-beta/ <br>
+> Safari: https://safari.tampermonkey.net/tampermonkey.safariextz <br>
+> Microsoft Edge: https://www.microsoft.com/store/p/tampermonkey/9nblggh5162s <br>
+> Brave: https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo <br>
 
 **2 - Image Printer**
 
