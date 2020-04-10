@@ -4,10 +4,11 @@
 // @match       https://pixelspace.glitch.me/*
 // @author      Felipe GM
 // @description see an image as it would be inside the game.
+// @updateURL   https://raw.githubusercontent.com/Felipefury/image-printer_pixelspace/master/src/index.user.js
 // @run-at      document-start
    // ==/UserScript==
 
-/* PLEASE DO NOT COPY AND PASTE THIS CODE ON TAMPERMONKEY. */
+/* FUCK EUZU GAY LIXO BOIOLA KORNO. */
 
 function run(){
     var canvas_jogo = document.getElementById("defaultCanvas1");
@@ -112,7 +113,7 @@ getData = function() {
 
     var container = document.createElement("div");
 
-    container.innerHTML = `<div style="margin-top:100px" class="overlay"><p style="text-align: center;font-size:15px" id="XYCoord">Use B key to<br>define x, yTESTE</p><p style="text-align: center;font-size:15px" id="fileP">Use J key to<br>open file</p><canvas id="Template" width="0" height="0"></canvas></div><input id="btnfile" type="file" style="margin-left: 15px;opacity:0" size="1"></input>`;
+    container.innerHTML = `<div style="margin-top:100px" class="overlay"><p style="text-align: center;font-size:15px" id="XYCoord">Use B key to<br>define x, y</p><p style="text-align: center;font-size:15px" id="fileP">Use J key to<br>open file</p><canvas id="Template" width="0" height="0"></canvas></div><input id="btnfile" type="file" style="margin-left: 15px;opacity:0" size="1"></input>`;
 
     document.body.appendChild(container);
 
