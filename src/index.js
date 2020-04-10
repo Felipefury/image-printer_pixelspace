@@ -102,7 +102,7 @@ handleFileSelect = function(data) {
 
 var container = document.createElement("div");
 
-container.innerHTML = `<div style="margin-top:100px" class="overlay"><p style="text-align: center;font-size:15px" id="XYCoord">Use B key to<br>define x, y</p><p style="text-align: center;font-size:15px" id="fileP">Use J key to<br>open file</p><canvas id="Template" width="0" height="0"></canvas></div><input id="btnfile" type="file" style="margin-left: 15px;opacity:0" size="1"></input>`;
+container.innerHTML = `<div style="margin-top:100px" class="overlay"><p style="text-align: center;font-size:15px" id="XYCoord">Use B key to<br>define x, y TESTE</p><p style="text-align: center;font-size:15px" id="fileP">Use J key to<br>open file</p><canvas id="Template" width="0" height="0"></canvas></div><input id="btnfile" type="file" style="margin-left: 15px;opacity:0" size="1"></input>`;
 
 document.body.appendChild(container);
 
