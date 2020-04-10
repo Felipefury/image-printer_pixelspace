@@ -1,47 +1,43 @@
-var canvas_jogo = document.getElementById("defaultCanvas1");
-var context_jogo = canvas_jogo.getContext("2d");
+    // ==UserScript==
+// @name        IPP
+// @version     1.0
+// @match       https://pixelspace.glitch.me/*
+// @author      Felipe GM
+// @description see an image as it would be inside the game.
+// @run-at      document-start
+   // ==/UserScript==
 
-var x,y,w,h,imgLoad;
-/*
-var dataPixeis = {
-    'errors': 0,
-    'correct': 0
-}
+function run(){
+    var canvas_jogo = document.getElementById("defaultCanvas1");
+    var context_jogo = canvas_jogo.getContext("2d");
 
+    var x,y,w,h,imgLoad;
 
-rgbToHex = function (rgb) { 
+    drawImage = function() {
 
-    var hex = Number(rgb).toString(16);
-    if (hex.length < 2) {
-         hex = "0" + hex;
+        let XX = (x - tiled.leftTopX) *zoom
+        let YY = (y - tiled.leftTopY) *zoom
+
+        context_jogo.globalAlpha = .5;
+        context_jogo.imageSmoothingEnabled = false;
+        context_jogo.drawImage(imgLoad, XX, YY, w * zoom,h * zoom);
+
+        if(zoom <= 4) {
+            context_jogo.lineWidth = "1";
+        } else {
+            context_jogo.lineWidth = "3";
+        };
+
+        context_jogo.globalAlpha = 1;
+        context_jogo.beginPath();
+        context_jogo.strokeStyle = "red";
+        context_jogo.rect(XX, YY, w * zoom,h * zoom);
+        context_jogo.stroke();
+
+        window.requestAnimationFrame(drawImage);
     }
-    return hex;
-};*/
 
-drawImage = function() {
-
-    let XX = (x - tiled.leftTopX) *zoom
-    let YY = (y - tiled.leftTopY) *zoom
-
-    context_jogo.globalAlpha = .5;
-    context_jogo.imageSmoothingEnabled = false;
-    context_jogo.drawImage(imgLoad, XX, YY, w * zoom,h * zoom);
-    
-    if(zoom <= 4) {
-        context_jogo.lineWidth = "1";
-    } else {
-        context_jogo.lineWidth = "3";
-    };
-
-    context_jogo.globalAlpha = 1;
-    context_jogo.beginPath();
-    context_jogo.strokeStyle = "red";
-    context_jogo.rect(XX, YY, w * zoom,h * zoom);
-    context_jogo.stroke();
-
-    window.requestAnimationFrame(drawImage);
-}
-
+/*
 getData = function() {
 
     let canvas_jogo0 = document.getElementById("defaultCanvas0");
@@ -76,70 +72,73 @@ getData = function() {
         };
     }
 }
+*/
 
+    handleFileSelect = function(data) {
+        if(imgLoad) return;
+        let file = data.target.files[0];
 
-handleFileSelect = function(data) {
-    if(imgLoad) return;
-    let file = data.target.files[0];
-
-    if(file.type != 'image/png') {
-        document.getElementById('fileP').textContent = 'use .png images'
-        return
-    };
-
-    if(!x || !y) {
-        document.getElementById('XYCoord').style.color = "red";
-        return
-    };
-  
-    var reader = new FileReader();
-    reader.onload = (function(theFile) {
-        return function(e) {
-  
-            let img = new Image();
-            img.src = e.target.result;
-            img.onload = function() {
-
-                h = this.height;
-                w = this.width;
-                imgLoad = img
-
-                drawImage()
-
-                setInterval(() => {
-                    getData()
-                }, 3000);
-            };
-
-        };
-    })(file);
-    reader.readAsDataURL(file);
-}
-
-var container = document.createElement("div");
-
-container.innerHTML = `<div style="margin-top:100px" class="overlay"><p style="text-align: center;font-size:15px" id="XYCoord">Use B key to<br>define x, y</p><p style="text-align: center;font-size:15px" id="fileP">Use J key to<br>open file</p><canvas id="Template" width="0" height="0"></canvas></div><input id="btnfile" type="file" style="margin-left: 15px;opacity:0" size="1"></input>`;
-
-document.body.appendChild(container);
-  
-document.getElementById('btnfile').addEventListener('change', handleFileSelect, false);
-
-document.addEventListener('keypress', (event) => {
-    if(event.key == 'b') {
-
-        x = lastPos[0]
-        y = lastPos[1]
-
-        document.getElementById('XYCoord').textContent = x + ',' + y
-        document.getElementById('XYCoord').style.color = "#ffffff"
-
-    } else if(event.key == 'j') {
-
-        if(!x || !y) {
-            document.getElementById('XYCoord').style.color = "red";
+        if(file.type != "image/png") {
+            document.getElementById("fileP").textContent = "use .png images"
             return
         };
-        
-        $("#btnfile").click(); 
+
+        if(!x || !y) {
+            document.getElementById("XYCoord").style.color = "red";
+            return
+        };
+
+        var reader = new FileReader();
+        reader.onload = (function(theFile) {
+            return function(e) {
+
+                let img = new Image();
+                img.src = e.target.result;
+                img.onload = function() {
+
+                    h = this.height;
+                    w = this.width;
+                    imgLoad = img
+
+                    drawImage()
+                };
+
+            };
+        })(file);
+        reader.readAsDataURL(file);
     }
-}); // FUCK EUZU ASS HOLE
+
+    var container = document.createElement("div");
+
+    container.innerHTML = `<div style="margin-top:100px" class="overlay"><p style="text-align: center;font-size:15px" id="XYCoord">Use B key to<br>define x, y</p><p style="text-align: center;font-size:15px" id="fileP">Use J key to<br>open file</p><canvas id="Template" width="0" height="0"></canvas></div><input id="btnfile" type="file" style="margin-left: 15px;opacity:0" size="1"></input>`;
+
+    document.body.appendChild(container);
+
+    document.getElementById("btnfile").addEventListener("change", handleFileSelect, false);
+
+    document.addEventListener("keypress", (event) => {
+        if(event.key == "b") {
+
+            x = lastPos[0]
+            y = lastPos[1]
+
+            document.getElementById("XYCoord").textContent = x + "," + y
+            document.getElementById("XYCoord").style.color = "#ffffff"
+
+        } else if(event.key == "j") {
+
+            if(!x || !y) {
+                document.getElementById("XYCoord").style.color = "red";
+                return
+            };
+
+            $("#btnfile").click();
+        }
+    });
+}
+
+window.onload = function(){
+    setTimeout(()=> {
+        run()
+    }, 3000)
+}
