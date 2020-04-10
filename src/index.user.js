@@ -10,9 +10,6 @@
 
 /* FUCK EUZU GAY LIXO BOIOLA KORNO. */
 
-var teste = "testando update"
-
-
 run = function(){
     var canvas_jogo = document.getElementById("defaultCanvas1");
     var context_jogo = canvas_jogo.getContext("2d");
