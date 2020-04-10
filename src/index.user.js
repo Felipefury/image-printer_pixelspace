@@ -152,6 +152,7 @@ run = function(){
             };
         }
     })
+}
 
 window.onload = function(){
     setTimeout(()=> {
