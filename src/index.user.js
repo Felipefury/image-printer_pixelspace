@@ -14,7 +14,29 @@ run = function(){
     var canvas_jogo = document.getElementById("defaultCanvas1");
     var context_jogo = canvas_jogo.getContext("2d");
 
+    var templateCanvas;
+    var templateContext;
+
     var x,y,w,h,imgLoad;
+
+    const colorsIds = {
+        "[0,0,0]":0,
+        "[73,73,73]":1,
+        "158,158,158]":2,
+        "[255,255,255]":3,
+        "[245,21,21]":4,
+        "[245,89,21]":5,
+        "[245,218,21]":6,
+        "[123,73,6]":7,
+        "[16,16,101]":8,
+        "[37,37,227]":9,
+        "[10,240,226]":10,
+        "[34,104,19]":11,
+        "[67,203,37]":12,
+        "[20,162,59]":13,
+        "[97,18,102]":14,
+        "[206,35,133]":15,
+    }
 
     drawImage = function() {
 
@@ -40,42 +62,6 @@ run = function(){
         window.requestAnimationFrame(drawImage);
     }
 
-/*
-getData = function() {
-
-    let canvas_jogo0 = document.getElementById("defaultCanvas0");
-    let context_jogo0 = canvas_jogo0.getContext("2d");
-
-    let XX = (x - tiled.leftTopX) * zoom
-    let YY = (y - tiled.leftTopY) * zoom
-
-    let imageCanvasData = context_jogo.getImageData(XX, YY, w, h);
-    let canvasData = context_jogo0.getImageData(XX, YY, w, h);
-
-    dataPixeis.correct = 0;
-    dataPixeis.errors  = 0;
-
-    for(i = 0; i < w * h; i++) {
-
-        let rC = rgbToHex(imageCanvasData.data[i])
-        let gC = rgbToHex(imageCanvasData.data[i + 1])
-        let bC = rgbToHex(imageCanvasData.data[i + 2])
-
-        let rI = rgbToHex(canvasData.data[i])
-        let gI = rgbToHex(canvasData.data[i + 1])
-        let bI = rgbToHex(canvasData.data[i + 2])
-
-        let canvasTemplate = [rC,gC,bC]
-        let canvasGameData = [rI,gI,bI]
-
-        if(canvasTemplate == canvasGameData) {
-            dataPixeis.correct++
-        } else {
-            dataPixeis.errors++
-        };
-    }
-}
-*/
 
     handleFileSelect = function(data) {
         if(imgLoad) return;
@@ -103,6 +89,12 @@ getData = function() {
                     w = this.width;
                     imgLoad = img
 
+                    templateCanvas = document.createElement('canvas');
+                    templateCanvas.width = this.width;
+                    templateCanvas.height = this.height;
+                    templateContext = templateCanvas.getContext('2d');
+                    templateContext.drawImage(img, 0, 0, w, h);
+
                     drawImage()
                 };
 
@@ -121,7 +113,6 @@ getData = function() {
 
     document.addEventListener("keypress", (event) => {
         if(event.key == "b") {
-
             x = lastPos[0]
             y = lastPos[1]
 
@@ -129,16 +120,38 @@ getData = function() {
             document.getElementById("XYCoord").style.color = "#ffffff"
 
         } else if(event.key == "j") {
-
             if(!x || !y) {
                 document.getElementById("XYCoord").style.color = "red";
                 return
             };
 
-            $("#btnfile").click();
+            $("#btnfile").click(); 
         }
     });
-}
+
+    document.addEventListener("mousemove", () => {
+        if(!imgLoad) return;
+
+        let XX = lastPos[0]
+        let YY = lastPos[1]
+
+        if(XX >= x && XX <= (x+w)-1 && YY >= y && YY <= (y+h)-1) {
+
+            let colorData = templateContext.getImageData((x - XX)*-1, (y - YY)*-1, 1, 1);
+
+            if(colorData.data[3] == 255) {
+                let color = `[${colorData.data[0]},${colorData.data[1]},${colorData.data[2]}]`
+
+                if (typeof colorsIds[color] != "undefined") {
+                    let picker = document.getElementById("picker")
+
+                    picker.children[selectedColor].className = ""
+                    selectedColor = colorsIds[color]
+                    picker.children[selectedColor].className = "selected"
+                }
+            };
+        }
+    })
 
 window.onload = function(){
     setTimeout(()=> {
