@@ -11,7 +11,7 @@
 /* FUCK EUZU GAY LIXO BOIOLA KORNO. */
 
 run = function(){
-    var canvas_jogo = document.getElementById("defaultCanvas1");
+    var canvas_jogo = document.getElementById("defaultCanvas0");
     var context_jogo = canvas_jogo.getContext("2d");
 
     var templateCanvas;
