@@ -19,6 +19,32 @@ run = function(){
 
     var x,y,w,h,imgLoad;
 
+    getxy = function() {
+        let dataXY = []
+        let XY = document.getElementById('coords').textContent
+
+        dataXY[0] = parseInt(XY.substring(0,XY.indexOf(',')))
+        dataXY[1] = parseInt(XY.substring(XY.indexOf(',')+2,XY.length))
+
+        return dataXY
+    }
+
+    getZoom = function () {
+        let params = window.location.href.split('?')[1]
+        let num = 0
+        let zoom = 1
+
+        for(i=0;i<params.length;i++) {
+            if(params.charAt(i) == ",") {
+                num++
+                if(num == 2) {
+                    zoom = params.substring(i+1,params.length)
+                }
+            }
+        }
+        return parseInt(zoom)
+    };
+
     const colorsIds = {
         "[0,0,0]":0,
         "[73,73,73]":1,
@@ -39,6 +65,8 @@ run = function(){
     }
 
     drawImage = function() {
+
+        let zoom = getZoom()
 
         let XX = (x - tiled.leftTopX) *zoom
         let YY = (y - tiled.leftTopY) *zoom
@@ -113,8 +141,10 @@ run = function(){
 
     document.addEventListener("keypress", (event) => {
         if(event.key == "b") {
-            x = lastPos[0]
-            y = lastPos[1]
+            let XY = getxy()
+
+            x = XY[0]
+            y = XY[1]
 
             document.getElementById("XYCoord").textContent = x + "," + y
             document.getElementById("XYCoord").style.color = "#ffffff"
@@ -132,8 +162,10 @@ run = function(){
     document.addEventListener("mousemove", () => {
         if(!imgLoad) return;
 
-        let XX = lastPos[0]
-        let YY = lastPos[1]
+        let XY = getxy()
+
+        XX = XY[0]
+        YY = XY[1]
 
         if(XX >= x && XX <= (x+w)-1 && YY >= y && YY <= (y+h)-1) {
 
@@ -143,11 +175,7 @@ run = function(){
                 let color = `[${colorData.data[0]},${colorData.data[1]},${colorData.data[2]}]`
 
                 if (typeof colorsIds[color] != "undefined") {
-                    let picker = document.getElementById("picker")
-
-                    picker.children[selectedColor].className = ""
-                    selectedColor = colorsIds[color]
-                    picker.children[selectedColor].className = "selected"
+                    $('#picker > div:eq('+colorsIds[color]+')').click()
                 }
             };
         }
