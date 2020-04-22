@@ -1,7 +1,7 @@
     // ==UserScript==
 // @name        IPP
-// @version     1.1
-// @match       https://pixelspace.glitch.me/*
+// @version     1.2
+// @match       https://pxspace.herokuapp.com/*
 // @author      Felipe GM
 // @description see an image as it would be inside the game.
 // @updateURL   https://raw.githubusercontent.com/Felipefury/image-printer_pixelspace/master/src/index.user.js
