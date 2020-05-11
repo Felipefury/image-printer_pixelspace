@@ -1,5 +1,16 @@
-<h1 align="center">Image printer pixelspace</h1>
-<p align="center">see an image as it would be inside the game</p>
+<h1 align="center">pxspace bot</h1>
+<p align="center">
+    <a href="https://discord.gg/CxG3f7S">
+        <img src="https://img.shields.io/discord/675323046680330261.svg?label=Discord&logo=discord" alt="Discord"/>
+    </a>
+
+</p>
+
+## Support the Project <br>
+**Donate with Bitcoin:** 3AN78uHeCoZ4kYJP5cFk6tXroaCxEqumky **Or** <a href="https://raw.githubusercontent.com/Felipefury/pxspace-bot/master/ignore_folder/qr.png">QR Bitcoin addresss</a><br>
+**Or with PayPal:** contact me
+
+<hr> </hr>
 
 # Requirements
 
