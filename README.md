@@ -1,4 +1,4 @@
-<h1 align="center">pxspace bot</h1>
+<h1 align="center">pxspace image printer</h1>
 <p align="center">
     <a href="https://discord.gg/CxG3f7S">
         <img src="https://img.shields.io/discord/675323046680330261.svg?label=Discord&logo=discord" alt="Discord"/>
