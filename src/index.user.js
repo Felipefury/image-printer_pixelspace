@@ -1,6 +1,6 @@
     // ==UserScript==
 // @name        IPP
-// @version     2.0
+// @version     2.1
 // @match       https://pxspace.herokuapp.com/*
 // @author      Felipe GM
 // @description see an image as it would be inside the game.
@@ -391,6 +391,7 @@ cursor: pointer;
         let xy = getxy()
 
         for(let i = 0; i < templates.length; i++) {
+            if(templates[i].hidden == true) return;
             if(xy.x >= templates[i].x && xy.x <= (templates[i].x + templates[i].w) - 1 && xy.y >= templates[i].y && xy.y <= (templates[i].y + templates[i].h) - 1) {
 
                 let color = templates[i].context.getImageData((templates[i].x - xy.x)*-1, (templates[i].y - xy.y)*-1, 1, 1);
