@@ -4,7 +4,7 @@
 // @match       https://pxspace.herokuapp.com/*
 // @author      Felipe GM
 // @description see an image as it would be inside the game.
-// @updateURL   https://raw.githubusercontent.com/Felipefury/image-printer_pixelspace/master/src/index.user.js
+// @updateURL   https://github.com/Felipefury/pxspace-image_printer/raw/master/src/index.user.js
 // @run-at      document-start
    // ==/UserScript==
 
