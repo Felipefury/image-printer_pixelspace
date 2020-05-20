@@ -1,6 +1,6 @@
     // ==UserScript==
 // @name        IPP
-// @version     2.1
+// @version     2.2
 // @match       https://pxspace.herokuapp.com/*
 // @author      Felipe GM
 // @description see an image as it would be inside the game.
@@ -37,78 +37,120 @@ run = function(){
 
     container.innerHTML = `
 
-<style>
-td,th,label {
-color: rgb(255, 255, 255);
-font-size:15px;
-}
-.cursor {
-cursor: pointer;
-}
-.slider {
-width: 100px;
-height: 10px;
-border-radius: 5px;
-background: #d3d3d3;
-outline: none;
-opacity: 0.7;
--webkit-transition: .2s;
-transition: opacity .2s;
-}
+    <style>
+    td,th,label {
+        color: rgb(255, 255, 255);
+        font-size:15px;
+    }
 
-.slider:hover {
-opacity: 1;
-}
+    .cursor {
+        cursor: pointer;
+    }
 
-.slider::-webkit-slider-thumb {
-appearance: none;
-width: 23px;
-height: 24px;
-border: 0;
+    .slider {
+        width: 100px;
+        height: 10px;
+        border-radius: 5px;
+        background: #d3d3d3;
+        outline: none;
+        opacity: 0.7;
+        -webkit-transition: .2s;
+        transition: opacity .2s;
+    }
 
-cursor: pointer;
-}
+    .slider:hover {
+        opacity: 1;
+    }
 
-.slider::-moz-range-thumb {
-width: 23px;
-height: 25px;
-border: 0;
-cursor: pointer;
-}
-</style>
+    .slider::-webkit-slider-thumb {
+        appearance: none;
+        width: 23px;
+        height: 24px;
+        border: 0;
+        cursor: pointer;
+    }
 
-<div style="margin-top:100px;margin-left:30px;border-radius: 8px;" class="overlay">
-<p style="text-align: center">PxSpace Printer</p>
-<table id="table">
-<thead>
-<tr>
-<th>Visible/Name</th>
-<th>X,Y</th>
-</tr>
-</thead>
-<tbody id="tbody">
-</tbody>
-</table>
-<p id="addTemplate" class="cursor" style="text-align: center">+</p>
-</div>
-<input id="btnfile" type="file" style="margin-left: 15px;opacity:0" size="1"></input>`;
+    .slider::-moz-range-thumb {
+        width: 23px;
+        height: 25px;
+        border: 0;
+        cursor: pointer;
+    }
 
+    .container {
+        box-shadow: 0px 0px 15px black;
+        margin-top: 100px;
+        margin-left: 40px;
+        border-radius: 8px;
+        display: block;
+        opacity: .6;
+        padding: 8px;
+        max-height: 36px;
+    }
+
+    .container2 {
+        box-shadow: 0px 0px 15px black;
+        margin-top: 99px;
+        margin-left: 345px;
+        border-radius: 8px;
+        display: block;
+        opacity: .6;
+        padding: 8px;
+    }
+
+    .container2:hover { 
+        opacity: .9;
+        overflow:hidden;
+        transition: opacity 0.7s ease-in-out;
+
+    }
+
+    .container:hover { 
+        opacity: .9;
+        overflow:hidden;
+        transition: max-height 0.5s ease-in-out, opacity 0.2s ease-in-out;
+        max-height: 500px;
+    }
+
+    .container:not(:hover){
+        opacity: .6;
+        overflow:hidden;
+        transition: max-height 0.5s ease-in-out, opacity 0.2s ease-in-out;
+        max-height: 36px;
+    }
+    </style>
+
+    <div class="overlay container">
+       <p style="text-align: center">PxSpace Printer</p>
+       <table id="table">
+          <thead>
+             <tr>
+                <th>Visible/Name</th>
+                <th>X,Y</th>
+             </tr>
+          </thead>
+          <tbody id="tbody"></tbody>
+       </table>
+       <p id="addTemplate" class="cursor" style="text-align: center">+</p>
+    </div>
+    <input id="btnfile" type="file" style="margin-left: 15px;opacity:0" size="1"></input>`;
+    
     container2.innerHTML = `
 
-<div id="container2" style="margin-top:-100px;margin-left:-310px;border-radius: 8px;opacity:0;padding: 5px;" class="overlay">
-<p class="cursor" id="close" style="color: rgb(255, 0, 0);text-align: right;margin-top: -5px" onClick="closeContainer()">x</p>
-<p id="templateinfo" style="text-align: center"></p>
+    <div id="container2" style="opacity: 0;pointer-events: none" class="overlay container2">
+       <div>
+          <i onClick="closeContainer()" style="position: absolute; right: 7; top: 5px;" class="cursor material-icons">close</i>
+          <span id="templateinfo" style="text-align: center;position: relative"></span>
+       </div>
+       <div class="slidecontainer">
+          <p style="text-align: center;font-size:10px !important;"> visibility: <input type="range" min="10" max="100" value="50" class="slider" id="myRange"></p>
+       </div>
+       <p id="deleteTemplate" onClick="deleteTemplate()" class="cursor" style="text-align: center;color: rgb(255, 0, 0);">delete template</p>
+    </div>`
 
-<div class="slidecontainer">
-<p style="text-align: center;font-size:10px !important;"> visibility: <input type="range" min="10" max="100" value="50" class="slider" id="myRange"></p>
-</div>
-
-<p id="deleteTemplate" onClick="deleteTemplate()" class="cursor" style="text-align: center;color: rgb(255, 0, 0);">delete template</p>
-</div>`
-
-    closeContainer = function() {
-        $("#container2").css({"margin-top": "-100","margin-left": "-310","opacity": 0})
-    }
+closeContainer = function() {
+    $("#container2").css({"pointer-events": "none","opacity": 0})
+}
 
     deleteTemplate = function() {
         let info;
@@ -133,7 +175,7 @@ cursor: pointer;
         for(let i = 0;i < templates.length; i++) {
             if(templates[i].name == template.id) info = i
         }
-        $("#container2").css({"margin-top": "100","margin-left": "310","opacity": .8})
+        $("#container2").css({"pointer-events": "all","opacity": .8})
         $('#myRange').val(templates[info].alpha*100)
         document.getElementById("templateinfo").innerHTML = template.id
 
@@ -411,5 +453,5 @@ cursor: pointer;
 window.onload = function(){
     setTimeout(()=> {
         run()
-    }, 3000)
+    }, 1000)
 }
