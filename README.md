@@ -25,6 +25,6 @@
 
 **2 - Image Printer**
 
-> link: https://github.com/Felipefury/image-printer_pixelspace/raw/master/src/index.user.js
+> link: https://github.com/Felipefury/pxspace-image_printer/raw/master/src/index.user.js
 
 ![bot 1](https://raw.githubusercontent.com/Felipefury/image-printer_pixelspace/master/img/bot.gif)
